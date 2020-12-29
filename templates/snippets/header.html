@@ -1,0 +1,177 @@
+{% load  static %}
+<style type="text/css">
+
+    .header {
+        margin-bottom: 50px;
+    }
+
+    .notifications-icon-container {
+
+    }
+
+    .account-image {
+        border: 1px solid #555;
+    }
+</style>
+<header class="d-flex p-3 px-md-4 mb-4 bg-white border-bottom shadow-sm ">
+    {# px-md-4 : if screen med use extra padding#}
+
+    {#    Medium Screen    #}
+    <div class="d-none d-md-flex flex-row my-auto flex-grow-1 align-items-center">
+        {#        if screen is medium d-none not use, d-md-flex use        #}
+        {#        flex-grow-1 use most space as possible      #}
+
+        {#    item 1 #}
+        <h3 class="mr-3 justify-content-start">
+            <a class="p-2" href="{% url 'home' %}">Home</a>
+        </h3>
+        {#        item 2 #}
+        <form action="" class="search-bar justify-content-start">
+            <label for="id_q_large" class="d-none"></label><input type="text" class="form-control"
+                                                                  name="q"
+                                                                  id="id_q_large"
+                                                                  placeholder="Search...">
+        </form>
+
+        {#     item 3    #}
+        <div class="d-flex flex-row-reverse flex-grow-1 my-grid-item">
+            <nav>
+                {% if request.user.is_authenticated %}
+
+                    <div class="dropdown dropleft show p-2">
+
+                        {#                        Actions#}
+                        <div class="d-flex flex-row">
+
+
+                            {# chat notifications #}
+                            <div class="btn-group dropleft">
+                                <div class="d-flex notifications-icon-container rounded-circle mr-3"
+                                     id="id_chat_notifications_dropdown_toggle"
+                                     data-toggle="dropdown">
+
+                                    <span id="id_chat_notifications_count"
+                                          class="notify-badge"></span>
+                                    <span class="d-flex material-icons notifications-material-icon m-auto align-items-center">chat</span>
+                                    <div class="dropdown-menu pre-scrollable"
+                                         aria-labelledby="id_chat_notifications_dropdown_toggle"
+                                         id="id_chat_notifications_container">
+
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            {# general notifications #}
+                            <div class="btn-group dropleft">
+                                <div class="d-flex notifications-icon-container rounded-circle mr-3"
+                                     id="id_notifications_dropdown_toggle"
+                                     data-toggle="dropdown">
+
+                                    <span id="id_general_notifications_count"
+                                          class="notify-badge"></span>
+                                    <span class="d-flex material-icons notifications-material-icon m-auto align-items-center">notifications</span>
+                                    <div class="dropdown-menu pre-scrollable"
+                                         aria-labelledby="id_notifications_dropdown_toggle"
+                                         id="id_notifications_dropdown_toggle">
+
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            {# account#}
+
+                            <div class="dropdown dropleft">
+                                <img class="account-image rounded-circle" type="button"
+                                     id="id_profile_links" data-toggle="dropdown"
+                                     aria-haspopup="true" aria-expanded="false" alt="avatar"
+                                     src="{{ request.user.profile_image.url }}"
+                                     width="40"
+                                     height="40"/>
+                                <div class="dropdown-menu" aria-labelledby="id_profile_links">
+                                    <a class="dropdown-item" href="#">Account</a>
+                                    <a class="dropdown-item" href="#">Logout</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                {% else %}
+                    <a class="p-2 text-dark text-decoration-none" href="#">Login</a>
+                    <a class="btn btn-outline-primary" href="#">Register</a>
+                {% endif %}
+
+            </nav>
+        </div>
+
+    </div>
+
+    {#    end medium screen     #}
+
+    {#    Small Screen    #}
+
+    <div class="d-flex d-md-none flex-column my-auto align-items-center flex-grow-1">
+
+        {#        row1   #}
+        <h3 class="d-flex justify-content-center my-grid-item mx-auto">
+            <a class="" href="{% url 'home' %}">Home</a>
+        </h3>
+        {#        row 2 #}
+        <form action="" class="search-bar justify-content-start">
+            <label for="id_q_large" class="d-none"></label><input type="text" class="form-control"
+                                                                  name="q"
+                                                                  id="id_q_large"
+                                                                  placeholder="Search...">
+        </form>
+
+
+        {#        row3   #}
+        <div class="d-flex flex-row-reverse flex-grow-1 my-grid-item pt-2">
+            <nav>
+                {% if request.user.is_authenticated %}
+
+                    <div class="dropdown dropleft show p-2">
+
+                        {#                        Actions#}
+                        <div class="d-flex flex-row">
+                            {# account#}
+
+                            <div class="dropdown dropleft">
+                                <img class="account-image rounded-circle" type="button"
+                                     id="id_profile_links" data-toggle="dropdown"
+                                     aria-haspopup="true" aria-expanded="false" alt="avatar"
+                                     src="{{ request.user.profile_image.url }}"
+                                     width="40"
+                                     height="40"/>
+                                <div class="dropdown-menu" aria-labelledby="id_profile_links">
+                                    <a class="dropdown-item" href="#">Account</a>
+                                    <a class="dropdown-item" href="#">Logout</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                {% else %}
+                    <a class="p-2 text-dark text-decoration-none" href="#">Login</a>
+                    <a class="btn btn-outline-primary" href="#">Register</a>
+                {% endif %}
+
+            </nav>
+        </div>
+
+    </div>
+
+
+    {#  End  Small Screen    #}
+
+</header>
